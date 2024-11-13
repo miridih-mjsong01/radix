@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>0</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/black.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="global.css">
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <p><em><strong>RADIX UI</strong></em></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <div class="font-mid">
+<p>Radix는 UI 라이브러리</p>
+<div class="fragment">
+<ul>
+<li>복잡한 UI를 <strong>HTML의 기본 엘리먼트처럼 쉽게 사용</strong>할 수 있다</li>
+</ul>
+</div>
+<div class="fragment">
+<pre><code class="language-html">
+&lt;form action=&quot;/register&quot; method=&quot;post&quot;&gt;
+    &lt;input name=&quot;email&quot; /&gt;
+
+    &lt;select name=&quot;language&quot;&gt;
+        &lt;option value=&quot;javascript&quot;&gt;javascript&lt;/option&gt;
+        &lt;option value=&quot;python&quot;&gt;python&lt;/option&gt;
+        &lt;option value=&quot;java&quot;&gt;java&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;
+&lt;/form&gt;
+
+</code></pre>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<img src="./0/html.gif">
+</div>
+<div class="fragment absolute fade-in-then-out" style="display: flex; "> 
+<img src="./0/ui1.png" width="400px" />
+<img src="./0/ui2.png" width="300px" height="200px" />
+<img src="./0/ui3.png" width="500px" />
+</div>
+<div class="fragment">
+<p><a href="http://localhost:9009/iframe.html?args=&amp;id=components-tabs--styled&amp;viewMode=story">Tabs 예시</a></p>
+<pre><code class="language-tsx">&lt;&gt;
+    &lt;Tabs.Root&gt;
+        &lt;Tabs.List&gt;
+            &lt;Tabs.Trigger value=&quot;tab-1&quot;&gt;
+                TAB-1
+            &lt;/Tabs.Trigger&gt;
+            &lt;Tabs.Trigger value=&quot;tab-2&quot;&gt;
+                TAB-2
+            &lt;/Tabs.Trigger&gt;
+        &lt;/Tabs.List&gt;
+
+        &lt;Tabs.Content value=&quot;tab-1&quot;&gt;
+            &lt;div&gt;Content-1&lt;/div&gt;
+        &lt;/Tabs.Content&gt;
+        &lt;Tabs.Content value=&quot;tab-2&quot;&gt;
+            &lt;div&gt;Content-2&lt;/div&gt;
+        &lt;/Tabs.Content&gt;
+    &lt;/Tabs.Root&gt;
+&lt;/&gt;
+</code></pre>
+</div>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <div class="font-mid">
+<p>Compound Pattern</p>
+<div class="fragmenta">
+<pre><code class="language-tsx">&lt;&gt;
+    &lt;Dialog.Root&gt;
+
+        &lt;Dialog.Trigger /&gt;
+
+        &lt;Dialog.Portal&gt;
+
+            &lt;Dialog.Content&gt;
+            
+                &lt;div&gt;Content&lt;/div&gt;        
+
+            &lt;/Dialog.Content&gt;
+
+        &lt;/Dialog.Portal&gt;
+
+    &lt;/Dialog.Root&gt;
+&lt;/&gt;
+</code></pre>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Accessibility</p>
+<p><a href="https://www.w3.org/WAI/ARIA/apg/patterns/">WAI-ARIA Authoring Practices Guide</a></p>
+<p><img src="./0/aria-pattern.png" alt="WAI-ARIA Authoring Practice Guide"></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Internal Utility</p>
+<div class="tiles">
+<div class="fragment">
+<p><img src="./0/internal-radix-context.png" alt="@radix-ui/react-context"></p>
+</div>
+<div class="fragment">
+<p><img src="./0/internal-radix-compose-refs.png" alt="@radix-ui/react-compose-refs"></p>
+</div>
+<div class="fragment">
+<p><img src="./0/internal-radix-use-controllable-state.png" alt="@radix-ui/react-use-controllable-state"></p>
+</div>
+<div class="fragment">
+<p><img src="./0/internal-radix-use-callback-ref.png" alt="@radix-ui/react-use-callback-ref"></p>
+</div>
+</div>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 1200,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+      chalkboard: { // font-awesome.min.css must be available
+        //src: "chalkboard/chalkboard.json",
+        storage: "chalkboard-demo",
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+      {
+        icon: '<i class="fa fa-pen-square"></i>',
+        title: 'Toggle chalkboard (B)',
+        action: 'RevealChalkboard.toggleChalkboard();'
+      },
+      {
+        icon: '<i class="fa fa-pen"></i>',
+        title: 'Toggle notes canvas (C)',
+        action: 'RevealChalkboard.toggleNotesCanvas();'
+      }
+      
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>

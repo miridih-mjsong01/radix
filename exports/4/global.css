@@ -1,0 +1,35 @@
+code {
+    max-height: 1000px !important;
+    width: 1000px !important;
+}
+
+strong {
+    color: lightgreen;
+}
+
+.font-small {
+    font-size: 28px;
+}
+
+.font-mid {
+    font-size: 34px;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+::selection {
+    color: white !important;
+    background: green !important;
+}

@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>4</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/black.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="global.css">
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <p><strong><em>Slot</em></strong></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><strong><em>Slot</em></strong></p>
+<p>Slot으로 전달된 prop을 children의 prop과 합친다.</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <ul>
+<li>사용 방법</li>
+</ul>
+<pre><code class="language-tsx">&lt;&gt;
+    &lt;Slot onClick={(e) =&gt; console.log(&quot;slot&quot;)}&gt;
+        &lt;div onClick={(e) =&gt; console.log(&quot;div&quot;)}&gt;
+            DIV
+        &lt;/div&gt;
+    &lt;/Slot&gt;
+&lt;/&gt;
+</code></pre>
+<div class="fragment">
+<div class="font-small">실제 DOM에 렌더링되는 모습은 다음과 같다.</div>
+<pre><code class="language-html">&lt;div&gt;
+    DIV
+&lt;/div&gt;
+</code></pre>
+<div class="font-small">DIV 클릭시, 합성된 클릭 핸들러가 호출된다. 위 예시에선 <strong>"div"</strong> -> <strong>"slot"</strong>순으로 로깅된다.</div>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><img src="./4/slot-image.png" alt="slot-image"></p>
+<div class="fragment">
+<pre><code class="language-tsx">const Slot = forwardRef((props, slotRef) =&gt; {
+  const { children, ...slotProps } = props;
+  const childrenProps = children.props;
+  const composedRefs = slotRef 
+    ? composeRefs(slotRef, childrenProps.ref) 
+    : childrenProps.ref;
+
+  return React.cloneElement(children, {
+    ...mergeProps(slotProps, childrenProps),
+    ref: composedRefs,
+  })
+})
+</code></pre>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot이 합성하는 prop의 종류</p>
+<ol>
+<li><strong>^on[A-Z]</strong>정규식에 매칭되는 prop (= handler)</li>
+</ol>
+<div class="fragment">
+<p><img src="./4/handler.png" alt="handler"></p>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot이 합성하는 prop의 종류</p>
+<ol start="2">
+<li><strong>className</strong></li>
+</ol>
+<div class="fragment">
+<p><img src="./4/className.png" alt="className"></p>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot이 합성하는 prop의 종류</p>
+<ol start="3">
+<li><strong>style</strong></li>
+</ol>
+<div class="fragment">
+<p><img src="./4/style.png" alt="style"></p>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot이 합성하는 prop의 종류</p>
+<ol start="4">
+<li><strong>ref</strong></li>
+</ol>
+<div class="fragment fade-in-then-out absolute" >
+<p><img src="./4/composerefs-slot.png" alt="composerefs-slot"></p>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>그 외의 props는 오버라이드</p>
+<p><img src="./4/mergeProps.png" alt="mergeProps"></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot 활용</p>
+<ul>
+<li>
+<p><strong>asChild 패턴</strong></p>
+<ul>
+<li>
+<p>컴포넌트를 다형적으로 사용할 수 있게</p>
+</li>
+<li>
+<p>엘리먼트 타입을 변경할 수 있는 prop을 제공</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="fragment">
+<pre><code class="language-tsx">const Button = ({ asChild, ...props }) =&gt; {
+    const Comp = asChild ? Slot : 'button';
+
+    return (
+        &lt;Comp {...props} className=&quot;button&quot; /&gt;
+    )
+}
+</code></pre>
+</div>
+<div class="fragment">
+<pre><code class="language-tsx">const App = () =&gt; {
+    return (
+        &lt;&gt;
+            &lt;Button&gt;버튼&lt;/Button&gt;
+
+            &lt;Button asChild&gt;
+                &lt;a href=&quot;...&quot;&gt;
+                    링크 버튼
+                &lt;/a&gt;
+            &lt;/Button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <ul>
+<li>Radix의 컴포넌트들은 기본 태그와 <strong>asChild</strong>패턴을 결합한 컴포넌트로 구현되기 때문에, 대부분 <strong>asChild</strong> 패턴을 지원한다.</li>
+</ul>
+<p><img src="./4/primitive.png" alt="Primitive"></p>
+<p><img src="./4/primitive-example.png" alt="PrimitiveExample"></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><strong>주의사항</strong></p>
+<p>children은 한개만 가능</p>
+<div class="fragment fade-in-then-out absolute">
+<pre><code class="language-tsx">// 정상 동작
+&lt;&gt;
+  &lt;Slot&gt;
+    &lt;Child /&gt;
+  &lt;/Slot&gt;
+&lt;/&gt;
+</code></pre>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<pre><code class="language-tsx">// 오류 발생함
+&lt;&gt;
+  &lt;Slot&gt;
+    &lt;Child /&gt;
+    &lt;Child /&gt;
+    &lt;Child /&gt;
+  &lt;/Slot&gt;
+&lt;/&gt;
+</code></pre>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><strong>Slottable</strong></p>
+<div class="fragment absolute fade-in-then-out">
+<pre><code data-line-numbers="6,7, 9,10" class="language-tsx">&lt;&gt;
+    &lt;Slot&gt;
+
+        &lt;div&gt;Prefix&lt;/div&gt;
+
+        &lt;Slottable&gt;
+            &lt;a&gt;
+                &lt;A_Children /&gt;
+            &lt;/a&gt;
+        &lt;/Slottable&gt;
+
+        &lt;div&gt;Suffix&lt;/div&gt;
+
+    &lt;/Slot&gt;
+&lt;/&gt;
+</code></pre>
+</div>
+<div class="fragment absolute fade-in-then-out">
+<pre><code data-line-numbers="2, 6, 10, 14" class="language-tsx">&lt;&gt;
+    &lt;a&gt;
+
+        &lt;div&gt;Prefix&lt;/div&gt;
+
+        &lt;Slottable&gt;
+
+                &lt;A_Children /&gt;
+
+        &lt;/Slottable&gt;
+
+        &lt;div&gt;Suffix&lt;/div&gt;
+
+    &lt;/a&gt;
+&lt;/&gt;
+</code></pre>
+</div> 
+<div class="fragment absolute fade-in-then-out">
+<pre><code data-line-numbers="" class="language-tsx">&lt;&gt;
+    &lt;a&gt;
+
+        &lt;div&gt;Prefix&lt;/div&gt;
+
+
+
+        &lt;A_Children /&gt;
+
+
+
+        &lt;div&gt;Suffix&lt;/div&gt;
+
+    &lt;/a&gt;
+&lt;/&gt;
+</code></pre>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot 활용: <strong>Collection</strong></p>
+<p>컬렉션 아이템들을 추적하기 위한 컴포넌트</p>
+<ul style="display: flex; flex-direction: column;">
+<li class="fragment">
+Tabs
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/tabs.png" alt="tabs"></p>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/tabs-collectionItems.png" alt="tabs CollectionItems"></p>
+</div>
+</li>
+<li class="fragment">
+Toasts
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/toast.png" alt="Toast"></p>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/toast-collectionItems.png" alt="Toast CollectionItems"></p>
+</div>
+</li>
+<li class="fragment">
+Slider Thumbs
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/slider.png" alt="Slider"></p>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/slider-collectionItems.png" alt="Slider CollectionItems"></p>
+</div>
+</li>
+</ul>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot 활용: <strong>Collection</strong></p>
+<ul>
+<li>컬렉션 아이템 하나에서 컬렉션 전체에 접근할 수 있다.</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot 활용: <strong>Collection</strong></p>
+<div class="fragment fade-in-then-out absolute">
+<pre><code class="language-tsx">const ButtonItem = (props: {
+    children: ReactNode; 
+    disabled: boolean; 
+    value: string;    
+}) =&gt; {
+    return (
+        &lt;button type=&quot;button&quot; {...props}&gt;
+            {chlidren}
+        &lt;/button&gt;
+    )
+}
+</code></pre>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<pre><code class="language-tsx">const ButtonItem = (props: {
+    children: ReactNode; 
+    disabled: boolean; 
+    value: string;    
+}) =&gt; {
+    return (
+        &lt;Collection.ItemSlot {...props}&gt;
+            &lt;button type=&quot;button&quot;&gt;
+                {chlidren}
+            &lt;/button&gt;
+        &lt;/Collection.ItemSlot&gt;
+    )
+}
+</code></pre>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Slot 활용: <strong>Collection</strong></p>
+<pre><code data-line-numbers="2,3,5-8,10,12,13, 16-22" class="language-tsx">&lt;&gt;
+  &lt;Collection.Provider&gt;
+    &lt;Collection.Slot&gt;
+      &lt;ul&gt;
+        &lt;ButtonItem disabled={true} value=&quot;1&quot;&gt;..&lt;/ButtonItem&gt;
+        &lt;ButtonItem disabled={false} value=&quot;2&quot;&gt;..&lt;/ButtonItem&gt;
+        &lt;ButtonItem disabled={false} value=&quot;3&quot;&gt;..&lt;/ButtonItem&gt;
+        &lt;ButtonItem disabled={false} value=&quot;4&quot;&gt;..&lt;/ButtonItem&gt;
+      &lt;/ul&gt;
+    &lt;/Collection.Slot&gt;
+
+    &lt;LogItems /&gt;
+  &lt;/Collection.Provider&gt;
+&lt;/&gt;
+
+const LogItems = () =&gt; {
+    const getItems = useCollection()
+
+    useEffect(() =&gt; {
+        console.log(getItems());
+    });
+}
+</code></pre>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/getItems.png" alt="getItems"></p>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/getItems-ref.png" alt="getItems-ref"></p>
+</div>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p><a href="http://localhost:9009/iframe.html?args=&amp;id=components-navigationmenu--submenus&amp;viewMode=story">Navigation Menu 스토리</a></p>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/nav-menu-video.gif" alt="nav-menu-video"></p>
+<p><img src="./4/nav-menu-itemslot.png" alt="nav-menu-itemslot"></p>
+</div>
+<div class="fragment fade-in-then-out absolute">
+<p><img src="./4/nav-menu-animation.png" alt="nav-menu-animation"></p>
+</div>
+<div class="fragment fade-in absolute">
+<p><img src="./4/nav-menu-motion-attribute.png" alt="nav-menu-motion-attribute"></p>
+<p><img src="./4/motion.png" alt="motion"></p>
+</div>
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 1200,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+      chalkboard: { // font-awesome.min.css must be available
+        //src: "chalkboard/chalkboard.json",
+        storage: "chalkboard-demo",
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+      {
+        icon: '<i class="fa fa-pen-square"></i>',
+        title: 'Toggle chalkboard (B)',
+        action: 'RevealChalkboard.toggleChalkboard();'
+      },
+      {
+        icon: '<i class="fa fa-pen"></i>',
+        title: 'Toggle notes canvas (C)',
+        action: 'RevealChalkboard.toggleNotesCanvas();'
+      }
+      
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>

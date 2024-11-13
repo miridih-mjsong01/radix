@@ -1,0 +1,17 @@
+{
+  "name": "radix",
+  "packageManager": "yarn@4.5.1",
+  "scripts": {
+    "p1": "lite-server --baseDir=\"./exports/1\"",
+    "p2": "lite-server --baseDir=\"./exports/2\"",
+    "p3": "lite-server --baseDir=\"./exports/3\"",
+    "p4": "lite-server --baseDir=\"./exports/4\"",
+    "p5": "lite-server --baseDir=\"./exports/5\"",
+    "p0": "lite-server --baseDir=\"./exports/0\"",
+    "all": "run-p p5 p4 p3 p2 p1 p0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "npm-run-all": "^4.1.5"
+  }
+}
